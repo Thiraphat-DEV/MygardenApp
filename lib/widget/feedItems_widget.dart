@@ -106,7 +106,7 @@ class _FeedItemsWidgetState extends State<FeedItemsWidget> {
                               keyboardType: TextInputType.number,
                               maxLines: 1,
                               enabled: true,
-                              decoration:const InputDecoration(
+                              decoration: const InputDecoration(
                                   focusedBorder: UnderlineInputBorder(
                                       borderSide: BorderSide())),
                               textAlign: TextAlign.center,
@@ -120,7 +120,7 @@ class _FeedItemsWidgetState extends State<FeedItemsWidget> {
                                   if (value.isEmpty || int.parse(value) < 0) {
                                     _qualityController.text = '1';
                                   } else {
-                                    print("sum of quality");
+                                    _qualityController.text = value;
                                   }
                                 });
                               },
@@ -149,7 +149,7 @@ class _FeedItemsWidgetState extends State<FeedItemsWidget> {
                           Theme.of(context).cardColor),
                       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                         const RoundedRectangleBorder(
+                          const RoundedRectangleBorder(
                               borderRadius: BorderRadius.only(
                                   bottomLeft: Radius.circular(12.0),
                                   bottomRight: Radius.circular(12.0))))),

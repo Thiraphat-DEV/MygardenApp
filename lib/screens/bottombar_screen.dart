@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mygardenapp/provider/dark_theme_provider.dart';
 import 'package:mygardenapp/screens/home_screen.dart';
-import 'package:mygardenapp/screens/carts.dart';
+import 'package:mygardenapp/screens/cart/cart_screen.dart';
 import 'package:mygardenapp/screens/categories.dart';
 import 'package:mygardenapp/screens/users.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
