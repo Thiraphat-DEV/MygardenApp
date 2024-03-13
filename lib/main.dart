@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mygardenapp/consts/theme_data.dart';
 import 'package:mygardenapp/inside_screen/inside_feed_screen.dart';
+import 'package:mygardenapp/inside_screen/inside_product.dart';
 import 'package:mygardenapp/inside_screen/inside_sale_screen.dart';
 import 'package:mygardenapp/provider/dark_theme_provider.dart';
 import 'package:mygardenapp/screens/bottombar_screen.dart';
@@ -50,6 +51,7 @@ class _MyAppState extends State<MyApp> {
                 routes: {
                   InsideSaleScreen.routeName: (ctx) =>  const InsideSaleScreen(),
                   InsideFeedScreen.routeName: (ctx) =>  const InsideFeedScreen(),
+                  InsideProductDetail.routeName: (ctx) => const InsideProductDetail(),
                 },);
           }),
     );

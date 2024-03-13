@@ -1,6 +1,8 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mygardenapp/inside_screen/inside_product.dart';
+import 'package:mygardenapp/services/global_navigate.dart';
 import 'package:mygardenapp/services/global_utils.dart';
 import 'package:mygardenapp/widget/heartbtn_widget.dart';
 import 'package:mygardenapp/widget/price_widget.dart';
@@ -37,7 +39,9 @@ class _FeedItemsWidgetState extends State<FeedItemsWidget> {
       color: Theme.of(context).cardColor,
       child: InkWell(
         borderRadius: BorderRadius.circular(15.0),
-        onTap: () {},
+        onTap: () {
+          GlobalNavigate.navigateTo(context: context, routeName: InsideProductDetail.routeName);
+        },
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(

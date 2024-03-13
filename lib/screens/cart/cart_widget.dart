@@ -20,7 +20,7 @@ class _CartWidgetState extends State<CartWidget> {
   @override
   void initState() {
     // TODO: implement initState
-    _quantityController.text = '';
+    _quantityController.text = '1';
     super.initState();
   }
 
@@ -91,7 +91,8 @@ class _CartWidgetState extends State<CartWidget> {
                                           int.parse(value) < 0) {
                                         _quantityController.text = '1';
                                       } else {
-                                        _quantityController.text = value;
+                                        // _quantityController.text = value;
+                                        return;
                                       }
                                     });
                                   },
@@ -108,7 +109,8 @@ class _CartWidgetState extends State<CartWidget> {
                     ),
                     const Spacer(),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 8.0),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 5.0, vertical: 8.0),
                       child: Column(
                         children: [
                           const InkWell(
@@ -118,15 +120,22 @@ class _CartWidgetState extends State<CartWidget> {
                               size: 20,
                             ),
                           ),
-                      const SizedBox(
-                        height: 3,
-                      ),
-                      const HeartBtnWidget(),
-                      TextWidget(text: "50฿", color: color, fontsize: 18, maxLines: 1,)
-
+                          const SizedBox(
+                            height: 3,
+                          ),
+                          const HeartBtnWidget(),
+                          TextWidget(
+                            text: "50฿",
+                            color: color,
+                            fontsize: 18,
+                            maxLines: 1,
+                          )
                         ],
-                      ),)
-
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
                   ],
                 ),
               ),

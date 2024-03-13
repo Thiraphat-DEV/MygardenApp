@@ -1,16 +1,75 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:mygardenapp/screens/cart/cart_widget.dart';
+import 'package:mygardenapp/services/global_utils.dart';
+import 'package:mygardenapp/widget/textwidget.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    Color color = GlobalUtils(context).color;
     return Scaffold(
-      body: ListView.builder(
-          itemCount: 10, 
-          itemBuilder: ((context, index) => CartWidget())),
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        title: TextWidget(
+          text: "Cart(10)",
+          color: color,
+          fontsize: 22,
+          title: true,
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(
+              IconlyBroken.delete,
+              color: color,
+            ),
+          ),
+        ],
+      ),
+      body: Column(
+        children: [
+          _checkoutWidget(context),
+          Expanded(
+            child: ListView.builder(
+                itemCount: 10, itemBuilder: ((context, index) => CartWidget())),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _checkoutWidget(context) {
+    Color color = GlobalUtils(context).color;
+    Size size = GlobalUtils(context).screenSize;
+    return SizedBox(
+      width: double.infinity,
+      height: size.width * 0.1,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
+        child: Row(children: [
+          Material(
+            color: Colors.greenAccent,
+            borderRadius: BorderRadius.circular(10),
+            child: InkWell(
+              autofocus: true,
+              // borderRadius: BorderRadius.circular(10),
+              onTap: () {},
+              child: TextWidget(
+                color: color,
+                text: "สินค้าของคุณ",
+                fontsize: 20,
+              ),
+            ),
+          ),
+          const Spacer(),
+          FittedBox(child: TextWidget(text: "Total: 200 B", color: color, fontsize: 18, title: true,))
+        ]),
+      ),
     );
   }
 }

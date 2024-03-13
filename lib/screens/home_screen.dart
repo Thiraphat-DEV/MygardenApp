@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:mygardenapp/inside_screen/inside_feed_screen.dart';
 import 'package:mygardenapp/inside_screen/inside_sale_screen.dart';
-import 'package:mygardenapp/provider/dark_theme_provider.dart';
 import 'package:mygardenapp/services/global_navigate.dart';
 import 'package:mygardenapp/services/global_utils.dart';
 import 'package:mygardenapp/widget/feedItems_widget.dart';
