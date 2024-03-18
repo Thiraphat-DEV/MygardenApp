@@ -2,6 +2,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:mygardenapp/provider/dark_theme_provider.dart';
+import 'package:mygardenapp/screens/wishlist/wishlist_screen.dart';
+import 'package:mygardenapp/services/global_navigate.dart';
 import 'package:mygardenapp/widget/textwidget.dart';
 import 'package:provider/provider.dart';
 
@@ -90,7 +92,10 @@ class UserScreenState extends State<UserScreen> {
                   title: "Liked Product",
                   color: color,
                   icon: IconlyLight.heart,
-                  onPressed: () {}),
+                  onPressed: () {
+                    GlobalNavigate.navigateTo(
+                        context: context, routeName: WishListScreen.routeName);
+                  }),
               // -4 Viewd of product
               userLists(
                   title: "Viewed Product",
@@ -160,8 +165,8 @@ class UserScreenState extends State<UserScreen> {
               ),
               const Text('Logout'),
             ]),
-            content:
-                const Text('คุณต้องการออกจากระบบหรอค้าบ \n อยู่ด้วยกันก่อนน๊าา ^_^'),
+            content: const Text(
+                'คุณต้องการออกจากระบบหรอค้าบ \n อยู่ด้วยกันก่อนน๊าา ^_^'),
             actions: [
               TextButton(
                   onPressed: () {

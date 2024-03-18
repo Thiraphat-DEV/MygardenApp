@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:mygardenapp/inside_screen/inside_product.dart';
+import 'package:mygardenapp/services/global_navigate.dart';
 import 'package:mygardenapp/services/global_utils.dart';
 import 'package:mygardenapp/widget/heartbtn_widget.dart';
 import 'package:mygardenapp/widget/textwidget.dart';
@@ -29,7 +31,10 @@ class _CartWidgetState extends State<CartWidget> {
     Size size = GlobalUtils(context).screenSize;
     Color color = GlobalUtils(context).color;
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        GlobalNavigate.navigateTo(
+            context: context, routeName: InsideProductDetail.routeName);
+      },
       child: Row(
         children: [
           Expanded(
@@ -67,7 +72,19 @@ class _CartWidgetState extends State<CartWidget> {
                           child: Row(
                             children: [
                               _quantityMethod(
-                                  func: () {},
+                                  func: () {
+                                    if (int.parse(_quantityController.text) <=
+                                        0) {
+                                      return;
+                                    } else {
+                                      setState(() {
+                                        _quantityController.text = (int.parse(
+                                                    _quantityController.text) -
+                                                1)
+                                            .toString();
+                                      });
+                                    }
+                                  },
                                   icon: CupertinoIcons.minus,
                                   color: Colors.red),
                               // add text field between increase and decrease quantity
@@ -76,6 +93,7 @@ class _CartWidgetState extends State<CartWidget> {
                                 child: TextField(
                                   textAlign: TextAlign.center,
                                   controller: _quantityController,
+                                  style: TextStyle(color: color),
                                   keyboardType: TextInputType.number,
                                   maxLines: 1,
                                   decoration: const InputDecoration(
@@ -86,20 +104,28 @@ class _CartWidgetState extends State<CartWidget> {
                                         RegExp('[0-9.,]'))
                                   ],
                                   onChanged: (value) {
-                                    setState(() {
-                                      if (value.isEmpty ||
-                                          int.parse(value) < 0) {
-                                        _quantityController.text = '1';
-                                      } else {
-                                        // _quantityController.text = value;
-                                        return;
-                                      }
-                                    });
+                                    if (value.isEmpty) {
+                                      _quantityController.text = value;
+                                    } else {
+                                      return;
+                                    }
                                   },
                                 ),
                               ),
                               _quantityMethod(
-                                  func: () {},
+                                  func: () {
+                                    if (int.parse(_quantityController.text) <=
+                                        0) {
+                                      return;
+                                    } else {
+                                      setState(() {
+                                        _quantityController.text = (int.parse(
+                                                    _quantityController.text) +
+                                                1)
+                                            .toString();
+                                      });
+                                    }
+                                  },
                                   icon: CupertinoIcons.add,
                                   color: Colors.lightGreenAccent)
                             ],
