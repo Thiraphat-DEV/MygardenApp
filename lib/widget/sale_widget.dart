@@ -2,7 +2,7 @@ import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:mygardenapp/inside_screen/inside_product.dart';
-import 'package:mygardenapp/services/global_navigate.dart';
+import 'package:mygardenapp/services/global_method.dart';
 import 'package:mygardenapp/services/global_utils.dart';
 import 'package:mygardenapp/widget/heartbtn_widget.dart';
 import 'package:mygardenapp/widget/price_widget.dart';
@@ -29,7 +29,7 @@ class _SalesWidgetState extends State<SalesWidget> {
         autofocus: true,
         borderRadius: BorderRadius.circular(15.0),
         onTap: () {
-          GlobalNavigate.navigateTo(
+          GlobalMethods.navigateTo(
               context: context, routeName: InsideProductDetail.routeName);
         },
         child: Padding(

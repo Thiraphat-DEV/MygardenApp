@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:mygardenapp/screens/cart/cart_widget.dart';
+import 'package:mygardenapp/services/global_method.dart';
 import 'package:mygardenapp/services/global_utils.dart';
 import 'package:mygardenapp/widget/textwidget.dart';
 
@@ -23,7 +24,13 @@ class CartScreen extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+               GlobalMethods.warningDialogMethod(
+                        title: "มีของในตะกร้าอยู่รึเปล่าา",
+                        subtitle: "เเน่ใจน๊าาว่าจะลบเราอะ",
+                        fct: () {},
+                        context: context);
+            },
             icon: Icon(
               IconlyBroken.delete,
               color: color,

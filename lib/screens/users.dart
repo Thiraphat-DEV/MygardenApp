@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:mygardenapp/provider/dark_theme_provider.dart';
 import 'package:mygardenapp/screens/wishlist/wishlist_screen.dart';
-import 'package:mygardenapp/services/global_navigate.dart';
+import 'package:mygardenapp/services/global_method.dart';
 import 'package:mygardenapp/widget/textwidget.dart';
 import 'package:provider/provider.dart';
 
@@ -93,7 +93,7 @@ class UserScreenState extends State<UserScreen> {
                   color: color,
                   icon: IconlyLight.heart,
                   onPressed: () {
-                    GlobalNavigate.navigateTo(
+                    GlobalMethods.navigateTo(
                         context: context, routeName: WishListScreen.routeName);
                   }),
               // -4 Viewd of product
@@ -136,7 +136,11 @@ class UserScreenState extends State<UserScreen> {
                   color: color,
                   icon: IconlyBold.logout,
                   onPressed: () {
-                    _showDialogLogout();
+                    GlobalMethods.warningDialogMethod(
+                        title: "ต้องการออกจากระบบหรือไม่ครับ",
+                        subtitle: "อยู่ด้วยกันก่อนน๊าาา",
+                        fct: () {},
+                        context: context);
                   }),
               //userRow
               // userRow()
@@ -145,50 +149,6 @@ class UserScreenState extends State<UserScreen> {
         )),
       ),
     );
-  }
-
-  // function logout with show warning dialog before user logout
-  Future<void> _showDialogLogout() async {
-    await showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Row(children: <Widget>[
-              Image.asset(
-                'assets/images/warning_logout.jpg',
-                height: 30,
-                width: 30,
-                fit: BoxFit.fill,
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              const Text('Logout'),
-            ]),
-            content: const Text(
-                'คุณต้องการออกจากระบบหรอค้าบ \n อยู่ด้วยกันก่อนน๊าา ^_^'),
-            actions: [
-              TextButton(
-                  onPressed: () {
-                    if (Navigator.canPop(context)) {
-                      Navigator.pop(context);
-                    }
-                  },
-                  child: TextWidget(
-                    color: Colors.yellow.shade900,
-                    text: 'ยกเลิก',
-                    fontsize: 18,
-                  )),
-              TextButton(
-                  onPressed: () {},
-                  child: TextWidget(
-                    color: Colors.redAccent,
-                    text: 'ออกจากระบบ',
-                    fontsize: 18,
-                  )),
-            ],
-          );
-        });
   }
 
   // function editAddressDialog with input Text from user and save to show text update with Dialog

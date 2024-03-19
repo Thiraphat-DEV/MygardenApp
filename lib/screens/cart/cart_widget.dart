@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:mygardenapp/inside_screen/inside_product.dart';
-import 'package:mygardenapp/services/global_navigate.dart';
+import 'package:mygardenapp/services/global_method.dart';
 import 'package:mygardenapp/services/global_utils.dart';
 import 'package:mygardenapp/widget/heartbtn_widget.dart';
 import 'package:mygardenapp/widget/textwidget.dart';
@@ -32,7 +32,7 @@ class _CartWidgetState extends State<CartWidget> {
     Color color = GlobalUtils(context).color;
     return GestureDetector(
       onTap: () {
-        GlobalNavigate.navigateTo(
+        GlobalMethods.navigateTo(
             context: context, routeName: InsideProductDetail.routeName);
       },
       child: Row(

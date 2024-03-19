@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:mygardenapp/inside_screen/inside_feed_screen.dart';
 import 'package:mygardenapp/inside_screen/inside_sale_screen.dart';
-import 'package:mygardenapp/services/global_navigate.dart';
+import 'package:mygardenapp/services/global_method.dart';
 import 'package:mygardenapp/services/global_utils.dart';
 import 'package:mygardenapp/widget/feedItems_widget.dart';
 import 'package:mygardenapp/widget/sale_widget.dart';
@@ -52,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             TextButton(
                 onPressed: () {
-                  GlobalNavigate.navigateTo(
+                  GlobalMethods.navigateTo(
                       context: context, routeName: InsideSaleScreen.routeName);
                 },
                 child: TextWidget(
@@ -114,7 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 const Spacer(),
                 TextButton(
                     onPressed: () {
-                      GlobalNavigate.navigateTo(
+                      GlobalMethods.navigateTo(
                           context: context,
                           routeName: InsideFeedScreen.routeName);
                     },
