@@ -4,6 +4,9 @@ import 'package:mygardenapp/inside_screen/inside_feed_screen.dart';
 import 'package:mygardenapp/inside_screen/inside_product.dart';
 import 'package:mygardenapp/inside_screen/inside_sale_screen.dart';
 import 'package:mygardenapp/provider/dark_theme_provider.dart';
+import 'package:mygardenapp/screens/auth/forgot_password_screen.dart';
+import 'package:mygardenapp/screens/auth/login_screen.dart';
+import 'package:mygardenapp/screens/auth/signup_screen.dart';
 import 'package:mygardenapp/screens/bottombar_screen.dart';
 import 'package:mygardenapp/screens/orders/order_screen.dart';
 import 'package:mygardenapp/screens/view/view_product_screen.dart';
@@ -58,6 +61,9 @@ class _MyAppState extends State<MyApp> {
             WishListScreen.routeName: (ctx) => const WishListScreen(),
             OrderScreen.routeName: (ctx) => const OrderScreen(),
             ViewProductScreen.routeName: (ctx) => const ViewProductScreen(),
+            LoginScreen.routeName: (ctx) => const LoginScreen(),
+            SignupScreen.routeName: (ctx) => const SignupScreen(),
+            ForgotPasswordScreen.routeName: (ctx) => const ForgotPasswordScreen(),
           },
         );
       }),

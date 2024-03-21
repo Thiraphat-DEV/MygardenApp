@@ -3,24 +3,25 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:mygardenapp/consts/login_img_screen.dart';
 import 'package:mygardenapp/screens/auth/auth_button.dart';
-import 'package:mygardenapp/screens/auth/forgot_password_screen.dart';
 import 'package:mygardenapp/screens/auth/google_button.dart';
-import 'package:mygardenapp/screens/auth/signup_screen.dart';
+import 'package:mygardenapp/screens/auth/login_screen.dart';
 import 'package:mygardenapp/services/global_utils.dart';
 import 'package:mygardenapp/widget/textwidget.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
-  static const routeName = "/LoginScreen";
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({super.key});
+  static const routeName = "/SignupScreen";
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignupScreen> createState() => _SignupScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignupScreenState extends State<SignupScreen> {
   //define input from user control
   final _emailTextController = TextEditingController();
+  final _fullNameController = TextEditingController();
   final _passwordTextController = TextEditingController();
   final _passwordFocusNode = FocusNode();
+  final _emailFocusNode = FocusNode();
   final _formKey = GlobalKey<FormState>();
 
   bool _obscureText = true;
@@ -29,20 +30,24 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void dispose() {
     // TODO: implement dispose
+    _fullNameController.dispose();
     _emailTextController.dispose();
     _passwordFocusNode.dispose();
+    _emailFocusNode.dispose();
     _passwordTextController.dispose();
     super.dispose();
   }
 
   // form submit for login of user
-  void _submitFormLogin() {
+  void _submitFormRegister() {
     final isValid = _formKey.currentState!.validate();
     // unfocus on editControl after user submit
     FocusScope.of(context).unfocus();
 
     // handle form of user with validation
-    isValid ? print("กรุณากรอกให้ครบจ้ะ") : print("กรอกครบเเล้วจ้า");
+    if (isValid) {
+      _formKey.currentState!.save();
+    }
   }
 
   @override
@@ -66,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
         SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.all(22.0),
+            padding: const EdgeInsets.all(22.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 10,
                 ),
                 TextWidget(
-                  text: "เข้าสู่ระบบเเล้วไปลุยกันเลย",
+                  text: "สร้างบัญชีเเล้วไปลุยกันเลย",
                   color: color,
                   fontsize: 18,
                 ),
@@ -96,6 +101,38 @@ class _LoginScreenState extends State<LoginScreen> {
                   key: _formKey,
                   child: Column(
                     children: [
+                      // fullname from user
+                      TextFormField(
+                        textInputAction: TextInputAction.next,
+                        onEditingComplete: () => FocusScope.of(context)
+                            .requestFocus(_emailFocusNode),
+                        keyboardType: TextInputType.name,
+                        controller: _fullNameController,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "กรุณากรอกชื่อของคุณ";
+                          } else {
+                            return null;
+                          }
+                        },
+                        style: const TextStyle(color: Colors.white),
+                        decoration: const InputDecoration(
+                          hintText: 'ชื่อของคุณ',
+                          hintStyle: TextStyle(color: Colors.white),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          errorBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.red),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
                       // Email
                       TextFormField(
                         textInputAction: TextInputAction.next,
@@ -105,7 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         keyboardType: TextInputType.emailAddress,
                         validator: (value) {
                           if (value!.isEmpty || !value.contains('@')) {
-                            return "กรุณากรอกอีเมลล์ของคุณให้ถูกต้องน๊ํา";
+                            return "กรุณากรอกอีเมลล์ของคุณให้ถูกต้องน๊า";
                           } else {
                             return 'ไปกันต่อ';
                           }
@@ -127,9 +164,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       TextFormField(
                         textInputAction: TextInputAction.done,
-                        onEditingComplete: () {
-                          _submitFormLogin();
-                        },
+                        onEditingComplete: _submitFormRegister,
                         controller: _passwordTextController,
                         obscureText: _obscureText,
                         focusNode: _passwordFocusNode,
@@ -171,34 +206,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(
                   height: 10,
                 ),
-                Align(
-                  alignment: Alignment.topRight,
-                  child: TextButton(
-                    onPressed: () {
-                      Navigator.pushReplacementNamed(
-                          context, ForgotPasswordScreen.routeName);
-                    },
-                    child: Text(
-                      'ลืมรหัสผ่าน',
-                      maxLines: 1,
-                      style: TextStyle(
-                          color: Colors.lightBlue,
-                          fontSize: 18,
-                          decoration: TextDecoration.underline,
-                          fontStyle: FontStyle.italic),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
                 AuthButton(
                   authFunction: () {},
-                  textbtn: "เข้าสู่ระบบ",
+                  textbtn: "สร้างบัญชีผู้ใช้",
                 ),
                 const SizedBox(
                   height: 10,
                 ),
+                // login with googleAPI
                 const GoogleButton(),
                 const SizedBox(
                   height: 10,
@@ -235,14 +250,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 RichText(
                   text: TextSpan(
-                      text: "ไม่มีบัญชีผู้ใช้",
+                      text: "มีบัญชีผู้ใช้อยู่เเล้ว",
                       style: const TextStyle(
                           color: Colors.white10,
                           fontSize: 18,
                           fontWeight: FontWeight.w300),
                       children: [
                         TextSpan(
-                            text: "สร้างบัญชีผู้ใช้",
+                            text: "เข้าสู่ระบบ",
                             style: const TextStyle(
                                 color: Colors.lightBlue,
                                 fontSize: 18,
@@ -250,7 +265,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
                                 Navigator.pushReplacementNamed(
-                                    context, SignupScreen.routeName);
+                                    context, LoginScreen.routeName);
                               }),
                       ]),
                 ),
