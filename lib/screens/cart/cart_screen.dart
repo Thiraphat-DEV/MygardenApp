@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:mygardenapp/screens/cart/cart_widget.dart';
+import 'package:mygardenapp/screens/cart/empty_screen.dart';
 import 'package:mygardenapp/services/global_method.dart';
 import 'package:mygardenapp/services/global_utils.dart';
 import 'package:mygardenapp/widget/textwidget.dart';
@@ -12,6 +13,8 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color color = GlobalUtils(context).color;
+    bool isEmpty = true;
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -25,11 +28,11 @@ class CartScreen extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-               GlobalMethods.warningDialogMethod(
-                        title: "มีของในตะกร้าอยู่รึเปล่าา",
-                        subtitle: "เเน่ใจน๊าาว่าจะลบเราอะ",
-                        fct: () {},
-                        context: context);
+              GlobalMethods.warningDialogMethod(
+                  title: "มีของในตะกร้าอยู่รึเปล่าา",
+                  subtitle: "เเน่ใจน๊าาว่าจะลบเราอะ",
+                  fct: () {},
+                  context: context);
             },
             icon: Icon(
               IconlyBroken.delete,
@@ -38,15 +41,24 @@ class CartScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          _checkoutWidget(context),
-          Expanded(
-            child: ListView.builder(
-                itemCount: 10, itemBuilder: ((context, index) => CartWidget())),
-          ),
-        ],
-      ),
+      // Check EmptyScreen on ProductCart 
+      body: isEmpty
+          ? EmptyScreen(
+            title: "เพิ่มสินค้าเข้าตะกร้าจ้า",
+            subtitle: "คุณสามารถเลือกดูสินค้าก่อนได้น๊าา",
+            imgPath: 'assets/images/emptybox.jpg',
+            buttonText: "ไปยังหน้าสินค้า",
+          )
+          : Column(
+              children: [
+                _checkoutWidget(context),
+                Expanded(
+                  child: ListView.builder(
+                      itemCount: 10,
+                      itemBuilder: ((context, index) => CartWidget())),
+                ),
+              ],
+            ),
     );
   }
 
@@ -74,7 +86,13 @@ class CartScreen extends StatelessWidget {
             ),
           ),
           const Spacer(),
-          FittedBox(child: TextWidget(text: "Total: 200 B", color: color, fontsize: 18, title: true,))
+          FittedBox(
+              child: TextWidget(
+            text: "Total: 200 B",
+            color: color,
+            fontsize: 18,
+            title: true,
+          ))
         ]),
       ),
     );

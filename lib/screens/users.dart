@@ -2,6 +2,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:mygardenapp/provider/dark_theme_provider.dart';
+import 'package:mygardenapp/screens/orders/order_screen.dart';
+import 'package:mygardenapp/screens/view/view_product_screen.dart';
 import 'package:mygardenapp/screens/wishlist/wishlist_screen.dart';
 import 'package:mygardenapp/services/global_method.dart';
 import 'package:mygardenapp/widget/textwidget.dart';
@@ -86,7 +88,10 @@ class UserScreenState extends State<UserScreen> {
                   title: "Your Orders",
                   color: color,
                   icon: IconlyLight.bag2,
-                  onPressed: () {}),
+                  onPressed: () {
+                    GlobalMethods.navigateTo(
+                        context: context, routeName: OrderScreen.routeName);
+                  }),
               // -3 wish of your liked
               userLists(
                   title: "Liked Product",
@@ -101,7 +106,11 @@ class UserScreenState extends State<UserScreen> {
                   title: "Viewed Product",
                   color: color,
                   icon: IconlyLight.show,
-                  onPressed: () {}),
+                  onPressed: () {
+                    GlobalMethods.navigateTo(
+                        context: context,
+                        routeName: ViewProductScreen.routeName);
+                  }),
               // -5 forgot your passwor
               userLists(
                   title: "Forgot Password",

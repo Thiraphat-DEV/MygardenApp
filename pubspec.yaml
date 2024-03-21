@@ -72,7 +72,8 @@ flutter:
     # - assets/images/black_cherry (1).jpg
     # - assets/images/cherrygarcy (1).jpg
     # - assets/images/emergenc (1).jpg
-      # - assets/images/emptybox.jpg
+      - assets/images/emptybox.jpg
+      - assets/images/history.jpg
     # - assets/images/female.jpg
     # - assets/images/female1.jpg
     # - assets/images/female2.jpg

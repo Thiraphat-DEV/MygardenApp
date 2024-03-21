@@ -31,7 +31,7 @@ class WishListScreen extends StatelessWidget {
               onPressed: () {
                 GlobalMethods.warningDialogMethod(
                     title: "มีของในตะกร้าอยู่รึเปล่าา",
-                    subtitle: "เเน่ใจน๊าาว่าจะลบเราอะ",
+                    subtitle: "เเน่ใจน๊าว่าจะลบเราอะ",
                     fct: () {},
                     context: context);
               },
