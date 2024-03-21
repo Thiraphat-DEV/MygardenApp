@@ -42,6 +42,7 @@ dependencies:
   card_swiper: ^2.0.3
   fancy_shimmer_image: ^2.0.3
   flutter_staggered_grid_view: ^0.7.0
+  badges: ^3.0.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -68,6 +69,8 @@ flutter:
   assets:
       - assets/images/
       - assets/images/cannabis/
+      - assets/images/landing/
+      - assets/images/offers
     # - assets/images/bananasickle (1).jpg
     # - assets/images/black_cherry (1).jpg
     # - assets/images/cherrygarcy (1).jpg
