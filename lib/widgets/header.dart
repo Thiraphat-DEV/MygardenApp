@@ -29,7 +29,7 @@ class Header extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              "Dashboard",
+              "ภาพรวมของสินค้า",
               style: Theme.of(context).textTheme.headline6,
             ),
           ),
@@ -38,7 +38,7 @@ class Header extends StatelessWidget {
         Expanded(
           child: TextField(
             decoration: InputDecoration(
-              hintText: "Search",
+              hintText: "ค้นหาสินค้า",
               fillColor: Theme.of(context).cardColor,
               filled: true,
               border: const OutlineInputBorder(

@@ -39,10 +39,14 @@ class _ProductWidgetState extends State<ProductWidget> {
                     Flexible(
                       flex: 3,
                       child: Image.network(
-                        'https://www.lifepng.com/wp-content/uploads/2020/11/Apricot-Large-Single-png-hd.png',
-                        fit: BoxFit.fill,
-                        // width: screenWidth * 0.12,
-                        height: size.width * 0.12,
+                        'https://via.placeholder.com/150x150',
+                        scale: 1.0,
+                        errorBuilder: (ctx, error, trace) {
+                          return Placeholder(
+                            fallbackWidth: 20,
+                            fallbackHeight: 100,
+                          );
+                        },
                       ),
                     ),
                     const Spacer(),
@@ -50,13 +54,13 @@ class _ProductWidgetState extends State<ProductWidget> {
                         itemBuilder: (context) => [
                               PopupMenuItem(
                                 onTap: () {},
-                                child: Text('Edit'),
+                                child: Text('เเก้ไขสินค้า'),
                                 value: 1,
                               ),
                               PopupMenuItem(
                                 onTap: () {},
                                 child: Text(
-                                  'Delete',
+                                  'ลบสินค้า',
                                   style: TextStyle(color: Colors.red),
                                 ),
                                 value: 2,
@@ -70,7 +74,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                 Row(
                   children: [
                     TextWidget(
-                      text: '\$1.99',
+                      text: '200 Baht',
                       color: color,
                       textSize: 18,
                     ),
@@ -80,7 +84,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                     Visibility(
                         visible: true,
                         child: Text(
-                          '\$3.89',
+                          '300 Baht',
                           style: TextStyle(
                               decoration: TextDecoration.lineThrough,
                               color: color),
@@ -97,7 +101,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                   height: 2,
                 ),
                 TextWidget(
-                  text: 'Title',
+                  text: 'ชื่อสินค้า',
                   color: color,
                   textSize: 24,
                   isTitle: true,

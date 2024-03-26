@@ -21,8 +21,6 @@ class _SideMenuState extends State<SideMenu> {
   Widget build(BuildContext context) {
     final theme = Utils(context).getTheme;
     final themeState = Provider.of<DarkThemeProvider>(context);
-
-    final color = Utils(context).color;
     return Drawer(
       child: ListView(
         children: [
@@ -32,7 +30,7 @@ class _SideMenuState extends State<SideMenu> {
             ),
           ),
           DrawerListTile(
-            title: "Main",
+            title: "หน้าหลัก",
             press: () {
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
@@ -43,17 +41,17 @@ class _SideMenuState extends State<SideMenu> {
             icon: Icons.home_filled,
           ),
           DrawerListTile(
-            title: "View all product",
+            title: "รายการสินค้าทั้งหมด",
             press: () {},
             icon: Icons.store,
           ),
           DrawerListTile(
-            title: "View all order",
+            title: "รายการสินค้าที่สั่ง",
             press: () {},
             icon: IconlyBold.bag_2,
           ),
           SwitchListTile(
-              title: const Text('Theme'),
+              title: const Text('เปลี่ยนสีพื้นหลัง'),
               secondary: Icon(themeState.getDarkTheme
                   ? Icons.dark_mode_outlined
                   : Icons.light_mode_outlined),
@@ -83,9 +81,6 @@ class DrawerListTile extends StatelessWidget {
   final IconData icon;
   @override
   Widget build(BuildContext context) {
-    final theme = Utils(context).getTheme;
-    final color = theme == true ? Colors.white : Colors.black;
-
     return ListTile(
         onTap: press,
         horizontalTitleGap: 0.0,
@@ -95,7 +90,7 @@ class DrawerListTile extends StatelessWidget {
         ),
         title: TextWidget(
           text: title,
-          color: color,
+          color: Colors.black87,
         ));
   }
 }

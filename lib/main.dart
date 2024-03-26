@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mywebgardenapp/controllers/MenuController.dart';
+import 'package:mywebgardenapp/controllers/MenuProductController.dart';
 import 'package:mywebgardenapp/screens/main_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -36,7 +36,7 @@ class _MyAppState extends State<MyApp> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => MenuController(),
+          create: (_) => MenuProductController(),
         ),
         ChangeNotifierProvider(
           create: (_) {
@@ -48,7 +48,7 @@ class _MyAppState extends State<MyApp> {
         builder: (context, themeProvider, child) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            title: 'Grocery',
+            title: 'ระบบขายสินค้า',
             theme: Styles.themeData(themeProvider.getDarkTheme, context),
             home: const MainScreen(),
           );

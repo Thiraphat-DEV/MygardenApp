@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mywebgardenapp/controllers/MenuController.dart';
+import 'package:mywebgardenapp/controllers/MenuProductController.dart';
 import 'package:mywebgardenapp/widgets/side_menu.dart';
 import 'package:provider/provider.dart';
 
@@ -12,7 +12,7 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: context.read<MenuController>().getScaffoldKey,
+      key: context.read<MenuProductController>().getScaffoldKey,
       drawer: const SideMenu(),
       body: SafeArea(
         child: Row(
