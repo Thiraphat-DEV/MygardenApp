@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mywebgardenapp/consts/constants.dart';
+import 'package:mywebgardenapp/responsive.dart';
 import 'package:mywebgardenapp/services/utils.dart';
+import 'package:mywebgardenapp/widgets/feed_products.dart';
 import 'package:mywebgardenapp/widgets/header.dart';
 import 'package:mywebgardenapp/widgets/products_widget.dart';
 import 'package:provider/provider.dart';
@@ -30,19 +32,17 @@ class DashboardScreen extends StatelessWidget {
                   // flex: 5,
                   child: Column(
                     children: [
-                      GridView.builder(
-                        physics: NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: 4,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      Responsive(
+                          mobile: FeedProducts(
                             crossAxisCount: size.width < 650 ? 2 : 3,
-                            childAspectRatio: size.width < 1400 ? 0.9: 1.08,
-                            crossAxisSpacing: defaultPadding,
-                            mainAxisSpacing: defaultPadding),
-                        itemBuilder: (ctx, index) {
-                          return ProductWidget();
-                        },
-                      ),
+                            childAspectRatio:
+                                size.width < 650 && size.width > 350
+                                    ? 1.1
+                                    : 0.8,
+                          ),
+                          desktop: FeedProducts(
+                            childAspectRatio: size.width < 1500 ? 0.7 : 1.05,
+                          ))
                     ],
                   ),
                 ),

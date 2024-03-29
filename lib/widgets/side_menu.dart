@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mywebgardenapp/inside_screen/show_all_products.dart';
 import 'package:mywebgardenapp/providers/dark_theme_provider.dart';
 import 'package:mywebgardenapp/services/utils.dart';
+import 'package:mywebgardenapp/widgets/orders/order_list_screen.dart';
 import 'package:mywebgardenapp/widgets/text_widget.dart';
 import 'package:iconly/iconly.dart';
 import 'package:provider/provider.dart';
@@ -42,12 +44,22 @@ class _SideMenuState extends State<SideMenu> {
           ),
           DrawerListTile(
             title: "รายการสินค้าทั้งหมด",
-            press: () {},
+            press: () {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => AllProductsScreen()));
+            },
             icon: Icons.store,
           ),
           DrawerListTile(
             title: "รายการสินค้าที่สั่ง",
-            press: () {},
+            press: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => OrderLists(),
+                ),
+              );
+            },
             icon: IconlyBold.bag_2,
           ),
           SwitchListTile(
