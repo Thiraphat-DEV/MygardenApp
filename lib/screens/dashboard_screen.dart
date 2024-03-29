@@ -4,6 +4,7 @@ import 'package:mywebgardenapp/responsive.dart';
 import 'package:mywebgardenapp/services/utils.dart';
 import 'package:mywebgardenapp/widgets/feed_products.dart';
 import 'package:mywebgardenapp/widgets/header.dart';
+import 'package:mywebgardenapp/widgets/orders/order_list_screen.dart';
 import 'package:mywebgardenapp/widgets/products_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:mywebgardenapp/controllers/MenuProductController.dart';
@@ -33,16 +34,16 @@ class DashboardScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       Responsive(
-                          mobile: FeedProducts(
-                            crossAxisCount: size.width < 650 ? 2 : 3,
-                            childAspectRatio:
-                                size.width < 650 && size.width > 350
-                                    ? 1.1
-                                    : 0.8,
-                          ),
-                          desktop: FeedProducts(
-                            childAspectRatio: size.width < 1500 ? 0.7 : 1.05,
-                          ))
+                        mobile: FeedProducts(
+                          crossAxisCount: size.width < 650 ? 2 : 3,
+                          childAspectRatio:
+                              size.width < 650 && size.width > 350 ? 1.1 : 0.8,
+                        ),
+                        desktop: FeedProducts(
+                          childAspectRatio: size.width < 1400 ? 0.5 : 1.05,
+                        ),
+                      ),
+                      Responsive(mobile: OrderLists(), desktop: OrderLists())
                     ],
                   ),
                 ),

@@ -4,6 +4,7 @@ import 'package:mywebgardenapp/responsive.dart';
 import 'package:mywebgardenapp/services/utils.dart';
 import 'package:mywebgardenapp/widgets/feed_products.dart';
 import 'package:mywebgardenapp/widgets/header.dart';
+import 'package:mywebgardenapp/widgets/orders/order_list_screen.dart';
 import 'package:mywebgardenapp/widgets/side_menu.dart';
 import 'package:provider/provider.dart';
 
@@ -28,25 +29,32 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
               const Expanded(child: SideMenu()),
             Expanded(
               flex: 5,
-                child: SingleChildScrollView(
-              child: Column(children: [
-                Header(
-                  fct: () {
-                    context.read<MenuProductController>().controlProductsMenu();
-                  },
+              child: SingleChildScrollView(
+                controller: ScrollController(),
+                child: Column(
+                  children: [
+                    Header(
+                      fct: () {
+                        context
+                            .read<MenuProductController>()
+                            .controlProductsMenu();
+                      },
+                    ),
+                    Responsive(
+                      mobile: FeedProducts(
+                          crossAxisCount: size.width < 650 ? 2 : 4,
+                          childAspectRatio:
+                              size.width < 650 && size.width > 350 ? 1.1 : 0.8,
+                          isMain: false),
+                      desktop: FeedProducts(
+                        childAspectRatio: size.width > 1400 ? 0.8 : 1.07,
+                        isMain: false,
+                      ),
+                    ),
+                  ],
                 ),
-                Responsive(
-                    mobile: FeedProducts(
-                        crossAxisCount: size.width < 650 ? 2 : 4,
-                        childAspectRatio:
-                            size.width < 650 && size.width > 350 ? 1.1 : 0.8,
-                        isMain: false),
-                    desktop: FeedProducts(
-                      childAspectRatio: size.width > 1400 ? 0.8 : 1.07,
-                      isMain: false,
-                    ))
-              ]),
-            ))
+              ),
+            ),
           ],
         ),
       ),

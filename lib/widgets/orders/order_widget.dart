@@ -20,7 +20,7 @@ class _OrderWidgetState extends State<OrderWidget> {
         borderRadius: BorderRadius.circular(8.0),
         color: Theme.of(context).cardColor.withOpacity(0.5),
         child: Padding(
-          padding: const EdgeInsets.all(0.1),
+          padding: const EdgeInsets.all(0.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -35,36 +35,37 @@ class _OrderWidgetState extends State<OrderWidget> {
                 width: 12,
               ),
               Expanded(
-                  flex: 10,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      TextWidget(
-                        text: "10 ชิ้น 90 บาท",
-                        color: color,
-                        textSize: 16,
-                        isTitle: true,
-                      ),
-                      FittedBox(
-                        child: Row(children: [
-                          TextWidget(
-                            text: "ผลิตโดย",
-                            color: Colors.blueAccent,
-                            textSize: 16,
-                            isTitle: true,
-                          ),
-                          TextWidget(
-                            text: "Thiraphat C.",
-                            color: color,
-                            textSize: 14,
-                            isTitle: true,
-                          ),
-                          const Text("20 มกราคม 2564")
-                        ]),
-                      )
-                    ],
-                  ))
+                flex: 10,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    TextWidget(
+                      text: "10 ชิ้น 90 บาท",
+                      color: color,
+                      textSize: 16,
+                      isTitle: true,
+                    ),
+                    FittedBox(
+                      child: Row(children: [
+                        TextWidget(
+                          text: "ผลิตโดย",
+                          color: Colors.blueAccent,
+                          textSize: 16,
+                          isTitle: true,
+                        ),
+                        TextWidget(
+                          text: "Thiraphat C.",
+                          color: color,
+                          textSize: 14,
+                          isTitle: true,
+                        ),
+                        const Text("20 มกราคม 2564")
+                      ]),
+                    )
+                  ],
+                ),
+              ),
             ],
           ),
         ),
