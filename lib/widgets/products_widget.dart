@@ -37,14 +37,13 @@ class _ProductWidgetState extends State<ProductWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Flexible(
-                      flex: 3,
+                      flex: 2,
                       child: Image.network(
                         'https://via.placeholder.com/150x150',
-                        scale: 1.0,
                         errorBuilder: (ctx, error, trace) {
-                          return Placeholder(
+                          return const Placeholder(
                             fallbackWidth: 20,
-                            fallbackHeight: 100,
+                            fallbackHeight: 20,
                           );
                         },
                       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mywebgardenapp/inside_screen/show_all_orders.dart';
 import 'package:mywebgardenapp/inside_screen/show_all_products.dart';
 import 'package:mywebgardenapp/providers/dark_theme_provider.dart';
 import 'package:mywebgardenapp/services/utils.dart';
@@ -56,7 +57,7 @@ class _SideMenuState extends State<SideMenu> {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => OrderLists(),
+                  builder: (context) => AllOrdersScreen(),
                 ),
               );
             },
