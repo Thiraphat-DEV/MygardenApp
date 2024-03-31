@@ -31,12 +31,14 @@ class _AllOrdersScreenState extends State<AllOrdersScreen> {
                 controller: ScrollController(),
                 child: Column(
                   children: [
+                    const SizedBox(height: 25,),
                     Header(
                       fct: () {
                         context
                             .read<MenuProductController>()
                             .controlAllOrder();
                       },
+                      title: "รายการสั่งสินค้าทั้งหมด",
                     ),
                     const SizedBox(
                       height: 20,

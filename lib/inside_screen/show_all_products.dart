@@ -33,7 +33,9 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
                 controller: ScrollController(),
                 child: Column(
                   children: [
+                    const SizedBox(height: 25,),
                     Header(
+                      title: 'สินค้าทั้งหมด',
                       fct: () {
                         context
                             .read<MenuProductController>()

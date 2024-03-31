@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mywebgardenapp/consts/constants.dart';
+import 'package:mywebgardenapp/inside_screen/add_products.dart';
 import 'package:mywebgardenapp/inside_screen/show_all_products.dart';
 import 'package:mywebgardenapp/responsive.dart';
+import 'package:mywebgardenapp/services/global_method.dart';
 import 'package:mywebgardenapp/services/utils.dart';
 import 'package:mywebgardenapp/widgets/buttons.dart';
 import 'package:mywebgardenapp/widgets/feed_products.dart';
@@ -26,6 +28,7 @@ class DashboardScreen extends StatelessWidget {
         child: Column(
           children: [
             Header(
+              title: "ภาพรวมของสินค้า",
               fct: () {
                 context.read<MenuProductController>().controlDashboarkMenu();
               },
@@ -52,7 +55,10 @@ class DashboardScreen extends StatelessWidget {
                       backgroundColor: color),
                   const Spacer(),
                   ButtonsWidget(
-                      onPressed: () {},
+                      onPressed: () {
+                        GlobalMethods.navigateTo(
+                            ctx: context, routeName: AddProductForm.routeName);
+                      },
                       text: 'เพิ่มสินค้า',
                       icon: Icons.add_box_rounded,
                       backgroundColor: color),

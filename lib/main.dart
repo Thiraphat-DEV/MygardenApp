@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mywebgardenapp/controllers/MenuProductController.dart';
+import 'package:mywebgardenapp/inside_screen/add_products.dart';
 import 'package:mywebgardenapp/screens/main_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -51,6 +52,9 @@ class _MyAppState extends State<MyApp> {
             title: 'ระบบขายสินค้า',
             theme: Styles.themeData(themeProvider.getDarkTheme, context),
             home: const MainScreen(),
+            routes: {
+              AddProductForm.routeName: (context) => AddProductForm(),
+            },
           );
         },
       ),
