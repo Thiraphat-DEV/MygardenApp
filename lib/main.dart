@@ -52,9 +52,7 @@ class _MyAppState extends State<MyApp> {
             title: 'ระบบขายสินค้า',
             theme: Styles.themeData(themeProvider.getDarkTheme, context),
             home: const MainScreen(),
-            routes: {
-              AddProductForm.routeName: (context) => AddProductForm(),
-            },
+           
           );
         },
       ),

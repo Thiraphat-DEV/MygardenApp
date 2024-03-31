@@ -56,8 +56,12 @@ class DashboardScreen extends StatelessWidget {
                   const Spacer(),
                   ButtonsWidget(
                       onPressed: () {
-                        GlobalMethods.navigateTo(
-                            ctx: context, routeName: AddProductForm.routeName);
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AddProductForm(),
+                          ),
+                        );
                       },
                       text: 'เพิ่มสินค้า',
                       icon: Icons.add_box_rounded,
