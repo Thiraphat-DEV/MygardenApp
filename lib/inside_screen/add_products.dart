@@ -30,7 +30,7 @@ class _AddProductFormState extends State<AddProductForm> {
 
   int _groupUnits = 1;
   bool isPiece = false;
-  File? pickedImage;
+  File? _pickedImage;
   Uint8List webImage = Uint8List(8);
   @override
   void initState() {
@@ -49,6 +49,18 @@ class _AddProductFormState extends State<AddProductForm> {
 
   void _uploadForm() async {
     final isValid = _formKey.currentState!.validate();
+  }
+
+  // clear form of add product
+  void clearForm() {
+    isPiece = false;
+    _groupUnits = 1;
+    _priceController.clear();
+    _titleController.clear();
+    setState(() {
+      _pickedImage = null;
+      webImage = Uint8List(8);
+    });
   }
 
   @override
@@ -71,223 +83,248 @@ class _AddProductFormState extends State<AddProductForm> {
     return Scaffold(
       key: context.read<MenuProductController>().getAddProductscaffoldKey,
       drawer: const SideMenu(),
-      body: Row(
-        children: [
-          if (Responsive.isDesktop(context))
-            const Expanded(
-              child: SideMenu(),
-            ),
-          Expanded(
-            flex: 5,
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Header(
-                    fct: () {
-                      context
-                          .read<MenuProductController>()
-                          .controlAddProductsMenu();
-                    },
-                    title: 'เพิ่มสินค้าเข้าคลัง',
-                  ),
-                  Container(
-                    width: size.width > 650 ? 650 : size.width,
-                    color: Theme.of(context).cardColor,
-                    padding: const EdgeInsets.all(16),
-                    margin: const EdgeInsets.all(16),
-                    child: Form(
-                      key: _formKey,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          TextWidget(
-                            text: 'ชื่อสินค้า',
-                            color: color,
-                            isTitle: true,
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          TextFormField(
-                            controller: _titleController,
-                            key: const ValueKey('ชื่อสินค้า'),
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'กรุณาใส่ชื่อสินค้า';
-                              }
-                              return null;
-                            },
-                            decoration: inputDecoration,
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                            children: [
-                              Expanded(
-                                flex: 2,
-                                child: FittedBox(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      TextWidget(
-                                        text: 'ราคาสินค้า',
-                                        color: color,
-                                        isTitle: true,
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      SizedBox(
-                                        width: 150,
-                                        height: 80,
-                                        child: TextFormField(
-                                          controller: _priceController,
-                                          key: const ValueKey('ราคาสินค้า'),
-                                          keyboardType: TextInputType.number,
-                                          validator: (value) {
-                                            if (value!.isEmpty) {
-                                              return 'กรุณาใส่ราคาสินค้า';
-                                            }
-                                            return null;
-                                          },
-                                          inputFormatters: <TextInputFormatter>[
-                                            FilteringTextInputFormatter.allow(
-                                                RegExp(r'[0-9.]')),
-                                          ],
-                                          decoration: inputDecoration,
-                                        ),
-                                      ),
-                                      const SizedBox(height: 20),
-                                      TextWidget(
-                                        text: 'ประเภทสินค้า',
-                                        color: color,
-                                        isTitle: true,
-                                      ),
-                                      const SizedBox(height: 10),
-                                      // Drop down menu code here
-                                      categoryDropdown(),
-                                      const SizedBox(
-                                        height: 20,
-                                      ),
-                                      TextWidget(
-                                        text: 'จำนวนสินค้า',
-                                        color: color,
-                                        isTitle: true,
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      // Radio button code here
-                                      Row(
-                                        children: [
-                                          TextWidget(
-                                              text: "กิโลกรัม", color: color),
-                                          Radio(
-                                            value: 1,
-                                            groupValue: _groupUnits,
-                                            onChanged: (val) {
-                                              setState(() {
-                                                _groupUnits = 1;
-                                                isPiece = false;
-                                              });
-                                            },
-                                            activeColor: Colors.green,
-                                          ),
-                                          TextWidget(
-                                              text: "ชิ้น", color: color),
-                                          Radio(
-                                            value: 2,
-                                            groupValue: _groupUnits,
-                                            onChanged: (val) {
-                                              setState(() {
-                                                _groupUnits = 2;
-                                                isPiece = true;
-                                              });
-                                            },
-                                            activeColor: Colors.green,
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              // Image to be picked code is here
-                              Expanded(
-                                  flex: 4,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Container(
-                                      height: size.width > 650
-                                          ? 350
-                                          : size.width * 0.45,
-
-                                      color: Theme.of(context)
-                                          .scaffoldBackgroundColor,
-                                      // call function boxImageProduct with choose product from user
-                                      child: boxImageProduct(color: color),
-                                    ),
-                                  )),
-                              Expanded(
-                                  flex: 1,
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (Responsive.isDesktop(context))
+              const Expanded(
+                child: SideMenu(),
+              ),
+            Expanded(
+              flex: 5,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Header(
+                      fct: () {
+                        context
+                            .read<MenuProductController>()
+                            .controlAddProductsMenu();
+                      },
+                      title: 'เพิ่มสินค้าเข้าคลัง',
+                    ),
+                    Container(
+                      width: size.width > 650 ? 650 : size.width,
+                      color: Theme.of(context).cardColor,
+                      padding: const EdgeInsets.all(16),
+                      margin: const EdgeInsets.all(16),
+                      child: Form(
+                        key: _formKey,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            TextWidget(
+                              text: 'ชื่อสินค้า',
+                              color: color,
+                              isTitle: true,
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            TextFormField(
+                              controller: _titleController,
+                              key: const ValueKey('ชื่อสินค้า'),
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'กรุณาใส่ชื่อสินค้า';
+                                }
+                                return null;
+                              },
+                              decoration: inputDecoration,
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Row(
+                              children: [
+                                Expanded(
+                                  flex: 2,
                                   child: FittedBox(
                                     child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
                                       children: [
-                                        TextButton(
-                                          onPressed: () {},
-                                          child: TextWidget(
-                                            text: 'ล้าง',
-                                            color: Colors.red,
+                                        TextWidget(
+                                          text: 'ราคาสินค้า',
+                                          color: color,
+                                          isTitle: true,
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        SizedBox(
+                                          width: 150,
+                                          height: 80,
+                                          child: TextFormField(
+                                            controller: _priceController,
+                                            key: const ValueKey('ราคาสินค้า'),
+                                            keyboardType: TextInputType.number,
+                                            validator: (value) {
+                                              if (value!.isEmpty) {
+                                                return 'กรุณาใส่ราคาสินค้า';
+                                              }
+                                              return null;
+                                            },
+                                            inputFormatters: <TextInputFormatter>[
+                                              FilteringTextInputFormatter.allow(
+                                                  RegExp(r'[0-9.]')),
+                                            ],
+                                            decoration: inputDecoration,
                                           ),
                                         ),
-                                        TextButton(
-                                          onPressed: () {},
-                                          child: TextWidget(
-                                            text: 'เพิ่มรูปภาพสินค้า',
-                                            color: Colors.blue,
-                                          ),
+                                        const SizedBox(height: 20),
+                                        TextWidget(
+                                          text: 'ประเภทสินค้า',
+                                          color: color,
+                                          isTitle: true,
+                                        ),
+                                        const SizedBox(height: 10),
+                                        // Drop down menu code here
+                                        categoryDropdown(),
+                                        const SizedBox(
+                                          height: 20,
+                                        ),
+                                        TextWidget(
+                                          text: 'จำนวนสินค้า',
+                                          color: color,
+                                          isTitle: true,
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        // Radio button code here
+                                        Row(
+                                          children: [
+                                            TextWidget(
+                                                text: "กิโลกรัม", color: color),
+                                            Radio(
+                                              value: 1,
+                                              groupValue: _groupUnits,
+                                              onChanged: (val) {
+                                                setState(() {
+                                                  _groupUnits = 1;
+                                                  isPiece = false;
+                                                });
+                                              },
+                                              activeColor: Colors.green,
+                                            ),
+                                            TextWidget(
+                                                text: "ชิ้น", color: color),
+                                            Radio(
+                                              value: 2,
+                                              groupValue: _groupUnits,
+                                              onChanged: (val) {
+                                                setState(() {
+                                                  _groupUnits = 2;
+                                                  isPiece = true;
+                                                });
+                                              },
+                                              activeColor: Colors.green,
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
-                                  )),
-                            ],
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(18.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                ButtonsWidget(
-                                  onPressed: () {},
-                                  text: 'ล้างฟอร์ม',
-                                  icon: IconlyBold.danger,
-                                  backgroundColor: Colors.red.shade300,
+                                  ),
                                 ),
-                                ButtonsWidget(
-                                  onPressed: () {
-                                    _uploadForm();
-                                  },
-                                  text: 'อัปโหลดฟอร์ม',
-                                  icon: IconlyBold.upload,
-                                  backgroundColor: Colors.blue,
-                                ),
+                                // Image to be picked code is here
+                                Expanded(
+                                    flex: 4,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Container(
+                                        height: size.width > 650
+                                            ? 350
+                                            : size.width * 0.45,
+
+                                        color: Theme.of(context)
+                                            .scaffoldBackgroundColor,
+                                        // call function boxImageProduct with choose product from user
+                                        child: _pickedImage == null
+                                            ? boxImageProduct(color: color)
+                                            : ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(12),
+                                                child: kIsWeb
+                                                    ? Image.memory(
+                                                        webImage,
+                                                        fit: BoxFit.fill,
+                                                      )
+                                                    : Image.file(
+                                                        _pickedImage!,
+                                                        fit: BoxFit.fill,
+                                                      ),
+                                              ),
+                                      ),
+                                    )),
+                                Expanded(
+                                    flex: 1,
+                                    child: FittedBox(
+                                      child: Column(
+                                        children: [
+                                          TextButton(
+                                            onPressed: () {
+                                              setState(() {
+                                                _pickedImage = null;
+                                                webImage = Uint8List(8);
+                                              });
+                                            },
+                                            child: TextWidget(
+                                              text: 'ล้าง',
+                                              color: Colors.red,
+                                            ),
+                                          ),
+                                          TextButton(
+                                            onPressed: () {},
+                                            child: TextWidget(
+                                              text: 'เพิ่มรูปภาพสินค้า',
+                                              color: Colors.blue,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    )),
                               ],
                             ),
-                          )
-                        ],
+                            Padding(
+                              padding: const EdgeInsets.all(18.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  ButtonsWidget(
+                                    onPressed: clearForm,
+                                    text: 'ล้างฟอร์ม',
+                                    icon: IconlyBold.danger,
+                                    backgroundColor: Colors.red.shade300,
+                                  ),
+                                  ButtonsWidget(
+                                    onPressed: () {
+                                      _uploadForm();
+                                    },
+                                    text: 'อัปโหลดฟอร์ม',
+                                    icon: IconlyBold.upload,
+                                    backgroundColor: Colors.blue,
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -295,7 +332,7 @@ class _AddProductFormState extends State<AddProductForm> {
   // define function for choose image from user and push to show in the box of interface
   Future<void> pickImageProduct() async {
     if (!kIsWeb) {
-      final ImagePicker _pickedImage = ImagePicker();
+      ImagePicker _pickedImage = ImagePicker();
       // choose source and select image
       XFile? image = await _pickedImage.pickImage(source: ImageSource.gallery);
 
@@ -303,7 +340,7 @@ class _AddProductFormState extends State<AddProductForm> {
       if (image != null) {
         var selectedImage = File(image.path);
         setState(() {
-          pickedImage = selectedImage;
+          _pickedImage = selectedImage as ImagePicker;
         });
       } else {
         // throw error
@@ -317,7 +354,7 @@ class _AddProductFormState extends State<AddProductForm> {
         var imgFile = await image.readAsBytes();
         setState(() {
           webImage = imgFile;
-          _pickedImage = File('a') as ImagePicker;
+          _pickedImage = File("a") as ImagePicker;
         });
       } else {
         // throw error
@@ -409,5 +446,11 @@ class _AddProductFormState extends State<AddProductForm> {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<File?>('_pickedImage', _pickedImage));
   }
 }
