@@ -2,17 +2,17 @@ import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mygardenapp/inside_screen/inside_product.dart';
+import 'package:mygardenapp/models/product_model.dart';
 import 'package:mygardenapp/services/global_method.dart';
 import 'package:mygardenapp/services/global_utils.dart';
 import 'package:mygardenapp/widget/heartbtn_widget.dart';
 import 'package:mygardenapp/widget/price_widget.dart';
 import 'package:mygardenapp/widget/textwidget.dart';
+import 'package:provider/provider.dart';
 
 class FeedItemsWidget extends StatefulWidget {
-  const FeedItemsWidget({super.key, required this.title, required this.imgUrl});
+  const FeedItemsWidget({super.key});
 
-  // define id, title ,imgUrl of product
-  final String title, imgUrl;
   @override
   State<FeedItemsWidget> createState() => _FeedItemsWidgetState();
 }
@@ -36,6 +36,7 @@ class _FeedItemsWidgetState extends State<FeedItemsWidget> {
   Widget build(BuildContext context) {
     Color color = GlobalUtils(context).color;
     Size size = GlobalUtils(context).screenSize;
+    final productModel = Provider.of<ProductModel>(context);
     return Material(
       borderRadius: BorderRadius.circular(12),
       color: Theme.of(context).cardColor,
@@ -52,7 +53,7 @@ class _FeedItemsWidgetState extends State<FeedItemsWidget> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               FancyShimmerImage(
-                imageUrl: widget.imgUrl,
+                imageUrl: productModel.imgUrl,
                 width: size.width * 0.25,
                 height: size.width * 0.25,
                 boxFit: BoxFit.fill,
@@ -65,7 +66,7 @@ class _FeedItemsWidgetState extends State<FeedItemsWidget> {
                     Flexible(
                       flex: 3,
                       child: TextWidget(
-                        text: widget.title,
+                        text: productModel.title,
                         color: color,
                         maxLines: 1,
                         fontsize: 16,
@@ -82,8 +83,8 @@ class _FeedItemsWidgetState extends State<FeedItemsWidget> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     PriceWidget(
-                      salePrice: 200,
-                      price: 350,
+                      salePrice: productModel.salePrice,
+                      price: productModel.price,
                       textPrice: _qualityController.text,
                       isSale: true,
                     ),
@@ -94,12 +95,12 @@ class _FeedItemsWidgetState extends State<FeedItemsWidget> {
                       child: Row(
                         children: [
                           Flexible(
-                            flex: 1,
+                            flex: 6,
                             child: FittedBox(
                               child: TextWidget(
                                 color: color,
-                                text: "/G",
-                                fontsize: 14,
+                                text: productModel.isPiece ? "Piece": "/G",
+                                fontsize: 20,
                                 title: true,
                               ),
                             ),

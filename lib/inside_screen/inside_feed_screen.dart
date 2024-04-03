@@ -131,10 +131,9 @@ class _InsideFeedScreenState extends State<InsideFeedScreen> {
                           allProductsList.length < 4
                               ? allProductsList.length
                               : 4,
-                          (index) => FeedItemsWidget(
-                                imgUrl: allProductsList[index].imgUrl,
-                                title: allProductsList[index].title,
-                              )),
+                          (index) => ChangeNotifierProvider.value(
+                            value: allProductsList[index],
+                            child: FeedItemsWidget())),
                     ),
                   ],
                 ),

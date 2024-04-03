@@ -28,8 +28,8 @@ class _HomeScreenState extends State<HomeScreen> {
     Color color = globalUtil.color;
     Size screenSize = globalUtil.screenSize;
     final productProvider = Provider.of<ProductProvider>(context);
-    List<ProductModel> allProductsList = productProvider.getProduct; 
-    
+    List<ProductModel> allProductsList = productProvider.getProduct;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -144,10 +144,11 @@ class _HomeScreenState extends State<HomeScreen> {
               shrinkWrap: true,
               childAspectRatio: screenSize.width / (screenSize.height * 0.67),
               // generate other product
-              children: List.generate(allProductsList.length <  4 ? allProductsList.length : 4, (index) => FeedItemsWidget(
-                imgUrl: allProductsList[index].imgUrl,
-                title: allProductsList[index].title,
-              )),
+              children: List.generate(
+                  allProductsList.length < 4 ? allProductsList.length : 4,
+                  (index) => ChangeNotifierProvider.value(
+                    value:allProductsList[index],
+                    child: FeedItemsWidget())),
             ),
           ],
         ),
