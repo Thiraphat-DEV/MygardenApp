@@ -1,9 +1,9 @@
 class LoginImageScreen {
   static final List<String> groceryImages = [
-    'assets/images/offres/Offer1.jpg',
-    'assets/images/offres/Offer2.jpg',
-    'assets/images/offres/Offer3.jpg',
-    'assets/images/offres/Offer4.jpg'
+    'assets/images/offers/Offer1.jpg',
+    'assets/images/offers/Offer2.jpg',
+    'assets/images/offers/Offer3.jpg',
+    'assets/images/offers/Offer4.jpg'
   ];
   static final List<String> loginImage = [
     'assets/images/landing/buy-on-laptop.jpg',

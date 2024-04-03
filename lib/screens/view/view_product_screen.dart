@@ -22,7 +22,7 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
     const isEmpty = true;
     return isEmpty
         ? EmptyScreen(
-            imgPath: "assets/images/history.png",
+            imgPath: "assets/images/history.jpg",
             title: "ยังไม่มีสินค้าที่คุณสนใจ",
             subtitle: "สามารถเลือกดูสินค้าที่อาจสนใจก่อนได้น๊าา",
             buttonText: "ไปดูสินค้ากัน")

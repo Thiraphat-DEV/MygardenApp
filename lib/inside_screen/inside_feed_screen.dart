@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:mygardenapp/consts/consts_product_model.dart';
+import 'package:mygardenapp/models/product_model.dart';
+import 'package:mygardenapp/providers_widget/product_provider.dart';
 import 'package:mygardenapp/services/global_utils.dart';
 import 'package:mygardenapp/widget/feedItems_widget.dart';
 import 'package:mygardenapp/widget/textwidget.dart';
+import 'package:provider/provider.dart';
 
 class InsideFeedScreen extends StatefulWidget {
   static const routeName = '/feed_screen';
@@ -31,6 +35,9 @@ class _InsideFeedScreenState extends State<InsideFeedScreen> {
     // define theme, color and get size of ui
     Color color = GlobalUtils(context).color;
     Size screenSize = GlobalUtils(context).screenSize;
+
+    final productProvider = Provider.of<ProductProvider>(context);
+    List<ProductModel> allProductsList = productProvider.getProduct;
 
     return Scaffold(
         appBar: AppBar(
@@ -120,7 +127,14 @@ class _InsideFeedScreenState extends State<InsideFeedScreen> {
                       padding: EdgeInsets.zero,
                       childAspectRatio:
                           screenSize.width / (screenSize.height * 0.65),
-                      children: List.generate(4, (index) => FeedItemsWidget()),
+                      children: List.generate(
+                          allProductsList.length < 4
+                              ? allProductsList.length
+                              : 4,
+                          (index) => FeedItemsWidget(
+                                imgUrl: allProductsList[index].imgUrl,
+                                title: allProductsList[index].title,
+                              )),
                     ),
                   ],
                 ),

@@ -9,8 +9,10 @@ import 'package:mygardenapp/widget/price_widget.dart';
 import 'package:mygardenapp/widget/textwidget.dart';
 
 class FeedItemsWidget extends StatefulWidget {
-  const FeedItemsWidget({super.key});
+  const FeedItemsWidget({super.key, required this.title, required this.imgUrl});
 
+  // define id, title ,imgUrl of product
+  final String title, imgUrl;
   @override
   State<FeedItemsWidget> createState() => _FeedItemsWidgetState();
 }
@@ -50,7 +52,7 @@ class _FeedItemsWidgetState extends State<FeedItemsWidget> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               FancyShimmerImage(
-                imageUrl: "https://via.placeholder.com/150x150",
+                imageUrl: widget.imgUrl,
                 width: size.width * 0.25,
                 height: size.width * 0.25,
                 boxFit: BoxFit.fill,
@@ -60,13 +62,17 @@ class _FeedItemsWidgetState extends State<FeedItemsWidget> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    TextWidget(
-                      text: "product name",
-                      color: color,
-                      fontsize: 16,
-                      title: true,
+                    Flexible(
+                      flex: 3,
+                      child: TextWidget(
+                        text: widget.title,
+                        color: color,
+                        maxLines: 1,
+                        fontsize: 16,
+                        title: true,
+                      ),
                     ),
-                    HeartBtnWidget(),
+                    const Flexible(flex: 1, child: HeartBtnWidget()),
                   ],
                 ),
               ),

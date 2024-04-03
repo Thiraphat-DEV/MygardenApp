@@ -4,6 +4,7 @@ import 'package:mygardenapp/inside_screen/inside_feed_screen.dart';
 import 'package:mygardenapp/inside_screen/inside_product.dart';
 import 'package:mygardenapp/inside_screen/inside_sale_screen.dart';
 import 'package:mygardenapp/provider/dark_theme_provider.dart';
+import 'package:mygardenapp/providers_widget/product_provider.dart';
 import 'package:mygardenapp/screens/auth/forgot_password_screen.dart';
 import 'package:mygardenapp/screens/auth/login_screen.dart';
 import 'package:mygardenapp/screens/auth/signup_screen.dart';
@@ -44,7 +45,10 @@ class _MyAppState extends State<MyApp> {
       providers: [
         ChangeNotifierProvider(create: (_) {
           return themeChangeProvider;
-        })
+        }),
+        ChangeNotifierProvider(
+          create: (_) => ProductProvider(),
+        ),
       ],
       child:
           Consumer<DarkThemeProvider>(builder: (context, themeProvider, child) {
@@ -63,7 +67,8 @@ class _MyAppState extends State<MyApp> {
             ViewProductScreen.routeName: (ctx) => const ViewProductScreen(),
             LoginScreen.routeName: (ctx) => const LoginScreen(),
             SignupScreen.routeName: (ctx) => const SignupScreen(),
-            ForgotPasswordScreen.routeName: (ctx) => const ForgotPasswordScreen(),
+            ForgotPasswordScreen.routeName: (ctx) =>
+                const ForgotPasswordScreen(),
           },
         );
       }),
