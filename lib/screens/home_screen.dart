@@ -1,7 +1,6 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
-import 'package:mygardenapp/consts/consts_product_model.dart';
 import 'package:mygardenapp/inside_screen/inside_feed_screen.dart';
 import 'package:mygardenapp/inside_screen/inside_sale_screen.dart';
 import 'package:mygardenapp/models/product_model.dart';
@@ -27,9 +26,12 @@ class _HomeScreenState extends State<HomeScreen> {
     final globalUtil = GlobalUtils(context);
     Color color = globalUtil.color;
     Size screenSize = globalUtil.screenSize;
+    // define product provider
     final productProvider = Provider.of<ProductProvider>(context);
+    // get all list of product
     List<ProductModel> allProductsList = productProvider.getProduct;
-
+    // get sale product from product provider
+    List<ProductModel> saleProductList = productProvider.getOnSaleProduct;
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -96,10 +98,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: SizedBox(
                     height: screenSize.height * 0.25,
                     child: ListView.builder(
-                      itemCount: 10,
+                      itemCount: saleProductList.length < 10 ? saleProductList.length : 10,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
-                        return SalesWidget();
+                        return ChangeNotifierProvider.value(
+                            value: saleProductList[index],
+                            child: SalesWidget());
                       },
                     ),
                   ),
@@ -147,8 +151,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: List.generate(
                   allProductsList.length < 4 ? allProductsList.length : 4,
                   (index) => ChangeNotifierProvider.value(
-                    value:allProductsList[index],
-                    child: FeedItemsWidget())),
+                      value: allProductsList[index], child: FeedItemsWidget())),
             ),
           ],
         ),

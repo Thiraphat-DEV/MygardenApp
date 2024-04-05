@@ -2,11 +2,13 @@ import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:mygardenapp/inside_screen/inside_product.dart';
+import 'package:mygardenapp/models/product_model.dart';
 import 'package:mygardenapp/services/global_method.dart';
 import 'package:mygardenapp/services/global_utils.dart';
 import 'package:mygardenapp/widget/heartbtn_widget.dart';
 import 'package:mygardenapp/widget/price_widget.dart';
 import 'package:mygardenapp/widget/textwidget.dart';
+import 'package:provider/provider.dart';
 
 class SalesWidget extends StatefulWidget {
   const SalesWidget({super.key});
@@ -21,7 +23,8 @@ class _SalesWidgetState extends State<SalesWidget> {
     // define theme, color and get size of ui
     Color color = GlobalUtils(context).color;
     Size size = GlobalUtils(context).screenSize;
-
+    // define product provider
+    final productSale = Provider.of<ProductModel>(context);
     return Material(
       borderRadius: BorderRadius.circular(15.0),
       color: Theme.of(context).cardColor.withOpacity(0.9),
@@ -42,7 +45,7 @@ class _SalesWidgetState extends State<SalesWidget> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   FancyShimmerImage(
-                    imageUrl: "https://via.placeholder.com/150x150",
+                    imageUrl: productSale.imgUrl,
                     width: size.width * 0.19,
                     height: size.width * 0.19,
                     boxFit: BoxFit.fill,
@@ -50,7 +53,7 @@ class _SalesWidgetState extends State<SalesWidget> {
                   Column(
                     children: [
                       TextWidget(
-                          text: "1G", color: color, fontsize: 22, title: true),
+                          text:productSale.isPiece ? "1Piece": "1G", color: color, fontsize: 22, title: true),
                       const SizedBox(
                         height: 6,
                       ),
@@ -73,9 +76,9 @@ class _SalesWidgetState extends State<SalesWidget> {
                   ),
                 ],
               ),
-              const PriceWidget(
-                salePrice: 200,
-                price: 350,
+               PriceWidget(
+                salePrice: productSale.salePrice,
+                price:productSale.price,
                 textPrice: '1',
                 isSale: true,
               ),
@@ -83,7 +86,7 @@ class _SalesWidgetState extends State<SalesWidget> {
                 height: 5,
               ),
               TextWidget(
-                text: "Product name",
+                text: productSale.title,
                 color: color,
                 fontsize: 16,
                 title: true,
