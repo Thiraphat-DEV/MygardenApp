@@ -49,7 +49,7 @@ class _ViewProductWidgetState extends State<ViewProductWidget> {
                 const SizedBox(
                   width: 12,
                 ),
-                TextWidget(text: "200 Baht", color: color, fontsize: 24),
+                TextWidget(text: "200 ฿", color: color, fontsize: 24),
               ],
             ),
             const Spacer(),

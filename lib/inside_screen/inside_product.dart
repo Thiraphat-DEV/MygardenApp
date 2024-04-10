@@ -3,9 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:mygardenapp/models/product_model.dart';
+import 'package:mygardenapp/providers_widget/product_provider.dart';
 import 'package:mygardenapp/services/global_utils.dart';
 import 'package:mygardenapp/widget/heartbtn_widget.dart';
 import 'package:mygardenapp/widget/textwidget.dart';
+import 'package:provider/provider.dart';
 
 class InsideProductDetail extends StatefulWidget {
   static const routeName = '/insideProductDetails';
@@ -28,9 +31,18 @@ class _InsideProductDetailState extends State<InsideProductDetail> {
 
   @override
   Widget build(BuildContext context) {
+    // get global method for theme
     Size size = GlobalUtils(context).screenSize;
     final Color color = GlobalUtils(context).color;
 
+    // get function call productById from providerWidget
+    final productProvider = Provider.of<ProductProvider>(context);
+    final productId = ModalRoute.of(context)!.settings.arguments as String;
+    final getProductId = productProvider.findProductById(productId);
+    double price =
+        getProductId.isOnSale ? getProductId.salePrice : getProductId.price;
+
+    double totalPrice = price * int.parse(_quantityTextController.text);
     return Scaffold(
       appBar: AppBar(
           leading: InkWell(
@@ -49,14 +61,14 @@ class _InsideProductDetailState extends State<InsideProductDetail> {
         Flexible(
           flex: 2,
           child: FancyShimmerImage(
-            imageUrl: "https://via.placeholder.com/50x50",
+            imageUrl: getProductId.imgUrl,
             width: size.width * 0.70,
             height: size.width * 0.70,
             // boxFit: BoxFit.fill,
           ),
         ),
         Flexible(
-          flex: 3,
+          flex: 4,
           child: Container(
             decoration: BoxDecoration(
               color: Theme.of(context).cardColor,
@@ -75,7 +87,7 @@ class _InsideProductDetailState extends State<InsideProductDetail> {
                     children: [
                       Flexible(
                         child: TextWidget(
-                          text: 'title',
+                          text: getProductId.title,
                           color: color,
                           fontsize: 25,
                           title: true,
@@ -92,13 +104,13 @@ class _InsideProductDetailState extends State<InsideProductDetail> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       TextWidget(
-                        text: '200 Bath',
+                        text: "${price.toStringAsFixed(2)} ฿",
                         color: Colors.green,
                         fontsize: 22,
                         title: true,
                       ),
                       TextWidget(
-                        text: '/G',
+                        text: getProductId.isPiece ? "Piece" : '/G',
                         color: color,
                         fontsize: 12,
                         title: false,
@@ -109,7 +121,7 @@ class _InsideProductDetailState extends State<InsideProductDetail> {
                       Visibility(
                         visible: true,
                         child: Text(
-                          '300 Baht',
+                          "${getProductId.price.toStringAsFixed(2)} ฿",
                           style: TextStyle(
                               fontSize: 15,
                               color: color,
@@ -231,7 +243,7 @@ class _InsideProductDetailState extends State<InsideProductDetail> {
                               child: Row(
                                 children: [
                                   TextWidget(
-                                    text: '200 Bath/',
+                                    text: "${totalPrice.toStringAsFixed(2)}฿/",
                                     color: color,
                                     fontsize: 20,
                                     title: true,
@@ -247,9 +259,6 @@ class _InsideProductDetailState extends State<InsideProductDetail> {
                             ),
                           ],
                         ),
-                      ),
-                      const SizedBox(
-                        width: 8,
                       ),
                       Flexible(
                         child: Material(

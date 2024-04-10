@@ -11,6 +11,23 @@ class ProductProvider with ChangeNotifier {
     return _productsList.where((elem) => elem.isOnSale).toList();
   }
 
+  // define function for get product by id from user
+  ProductModel findProductById(String productId) {
+    return _productsList.firstWhere((elem) => elem.id == productId);
+  }
+
+  // define function for get product by category
+  List<ProductModel> findByCategory(String category) {
+    // check each category of product with use define category to lowercase and  use "contain" for find every case in categories 
+    List<ProductModel> categories = _productsList
+        .where((element) => element.productCategory
+            .toLowerCase()
+            .contains(category.toLowerCase()))
+        .toList();
+    // return list of category
+    return categories;
+  }
+
   // define list of parameter for use
   static final List<ProductModel> _productsList = [
     ProductModel(
@@ -20,7 +37,7 @@ class ProductProvider with ChangeNotifier {
         productCategory: "Vegetable",
         price: 200,
         salePrice: 100,
-        isOnSale: false,
+        isOnSale: true,
         isPiece: false),
     ProductModel(
         id: '2567',
@@ -29,7 +46,7 @@ class ProductProvider with ChangeNotifier {
         productCategory: "cat",
         price: 200,
         salePrice: 100,
-        isOnSale: false,
+        isOnSale: true,
         isPiece: false),
     ProductModel(
         id: '2567',
@@ -38,7 +55,7 @@ class ProductProvider with ChangeNotifier {
         productCategory: "dog",
         price: 200,
         salePrice: 100,
-        isOnSale: false,
+        isOnSale: true,
         isPiece: false),
     ProductModel(
         id: '2567',
@@ -47,7 +64,7 @@ class ProductProvider with ChangeNotifier {
         productCategory: "Vegetable",
         price: 200,
         salePrice: 100,
-        isOnSale: false,
+        isOnSale: true,
         isPiece: false),
     ProductModel(
         id: '2567',
@@ -56,7 +73,7 @@ class ProductProvider with ChangeNotifier {
         productCategory: "dog",
         price: 200,
         salePrice: 100,
-        isOnSale: false,
+        isOnSale: true,
         isPiece: false),
     ProductModel(
         id: '2567',

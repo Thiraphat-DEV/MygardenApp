@@ -63,7 +63,7 @@ class CategoriesScreen extends StatelessWidget {
           mainAxisSpacing: 30, // horizontal spacing
           children: List.generate(productsList.length, (index) {
             return CategoriesWidget(
-              productText: productsList[index]['prodText'],
+              categoryText: productsList[index]['prodText'],
               imgPath: productsList[index]['path'],
               boxColor: boxColor[index],
             );

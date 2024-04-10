@@ -32,8 +32,9 @@ class _SalesWidgetState extends State<SalesWidget> {
         autofocus: true,
         borderRadius: BorderRadius.circular(15.0),
         onTap: () {
-          GlobalMethods.navigateTo(
-              context: context, routeName: InsideProductDetail.routeName);
+          // go to  sale product by id
+          Navigator.pushNamed(context, InsideProductDetail.routeName,
+              arguments: productSale.id);
         },
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -53,7 +54,10 @@ class _SalesWidgetState extends State<SalesWidget> {
                   Column(
                     children: [
                       TextWidget(
-                          text:productSale.isPiece ? "1Piece": "1G", color: color, fontsize: 22, title: true),
+                          text: productSale.isPiece ? "1Piece" : "1G",
+                          color: color,
+                          fontsize: 22,
+                          title: true),
                       const SizedBox(
                         height: 6,
                       ),
@@ -76,11 +80,11 @@ class _SalesWidgetState extends State<SalesWidget> {
                   ),
                 ],
               ),
-               PriceWidget(
+              PriceWidget(
                 salePrice: productSale.salePrice,
-                price:productSale.price,
+                price: productSale.price,
                 textPrice: '1',
-                isSale: true,
+                isSale:productSale.isOnSale,
               ),
               const SizedBox(
                 height: 5,

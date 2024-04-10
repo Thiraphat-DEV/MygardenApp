@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:mygardenapp/inside_screen/inside_category_screen.dart';
 import 'package:mygardenapp/services/global_utils.dart';
 import 'package:mygardenapp/widget/textwidget.dart';
 
 class CategoriesWidget extends StatelessWidget {
   CategoriesWidget(
       {Key? key,
-      required this.productText,
+      required this.categoryText,
       required this.imgPath,
       required this.boxColor})
       : super(key: key);
   // define parameters for use with call to CategoriesWidget
-  String productText, imgPath;
+  String categoryText, imgPath;
   Color boxColor;
 
   @override
@@ -22,7 +23,8 @@ class CategoriesWidget extends StatelessWidget {
     Color color = globalUtil.color;
     return InkWell(
       onTap: () {
-        print("look more product");
+        // go to product with category
+        Navigator.pushNamed(context, InsideCategoryScreen.routeName, arguments: categoryText);
       },
       child: Container(
         decoration: BoxDecoration(
@@ -38,7 +40,7 @@ class CategoriesWidget extends StatelessWidget {
                     image: AssetImage(imgPath), fit: BoxFit.fill)),
           ),
           TextWidget(
-            text: productText,
+            text: categoryText,
             color: color,
             fontsize: 20,
             title: true,

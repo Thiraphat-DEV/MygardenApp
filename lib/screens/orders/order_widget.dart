@@ -19,19 +19,27 @@ class _OrderWidgetState extends State<OrderWidget> {
     Size size = GlobalUtils(context).screenSize;
 
     return ListTile(
-      subtitle: Text('จ่ายเงิน: 2000 Baht'),
+      subtitle: Text('จ่ายเงิน: 2000 ฿'),
       onTap: () {
         GlobalMethods.navigateTo(
             context: context, routeName: InsideProductDetail.routeName);
       },
       leading: FancyShimmerImage(
-            imageUrl: "https://via.placeholder.com/50x50",
-            width: size.width * 0.70,
-            height: size.width * 0.70,
-            // boxFit: BoxFit.fill,
-          ),
-          title: TextWidget(text: "สินค้า (12)", color: color, fontsize: 18,),
-          trailing: TextWidget(text: "12/01/2000", color: color, fontsize: 18,),
+        imageUrl: "https://via.placeholder.com/50x50",
+        width: size.width * 0.70,
+        height: size.width * 0.70,
+        // boxFit: BoxFit.fill,
+      ),
+      title: TextWidget(
+        text: "สินค้า (12)",
+        color: color,
+        fontsize: 18,
+      ),
+      trailing: TextWidget(
+        text: "12/01/2000",
+        color: color,
+        fontsize: 18,
+      ),
     );
   }
 }

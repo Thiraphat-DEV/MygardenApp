@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:mygardenapp/consts/theme_data.dart';
+import 'package:mygardenapp/inside_screen/inside_category_screen.dart';
 import 'package:mygardenapp/inside_screen/inside_feed_screen.dart';
 import 'package:mygardenapp/inside_screen/inside_product.dart';
 import 'package:mygardenapp/inside_screen/inside_sale_screen.dart';
 import 'package:mygardenapp/provider/dark_theme_provider.dart';
+import 'package:mygardenapp/providers_widget/cart_provider.dart';
 import 'package:mygardenapp/providers_widget/product_provider.dart';
 import 'package:mygardenapp/screens/auth/forgot_password_screen.dart';
 import 'package:mygardenapp/screens/auth/login_screen.dart';
 import 'package:mygardenapp/screens/auth/signup_screen.dart';
 import 'package:mygardenapp/screens/bottombar_screen.dart';
+import 'package:mygardenapp/screens/categories.dart';
 import 'package:mygardenapp/screens/orders/order_screen.dart';
 import 'package:mygardenapp/screens/view/view_product_screen.dart';
 import 'package:mygardenapp/screens/wishlist/wishlist_screen.dart';
@@ -49,6 +52,7 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(
           create: (_) => ProductProvider(),
         ),
+        ChangeNotifierProvider(create: (_) => CartProvider()),
       ],
       child:
           Consumer<DarkThemeProvider>(builder: (context, themeProvider, child) {
@@ -69,6 +73,8 @@ class _MyAppState extends State<MyApp> {
             SignupScreen.routeName: (ctx) => const SignupScreen(),
             ForgotPasswordScreen.routeName: (ctx) =>
                 const ForgotPasswordScreen(),
+            InsideCategoryScreen.routeName: (ctx) =>
+                const InsideCategoryScreen(),
           },
         );
       }),

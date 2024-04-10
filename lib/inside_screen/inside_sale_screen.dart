@@ -3,6 +3,7 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:mygardenapp/models/product_model.dart';
 import 'package:mygardenapp/providers_widget/product_provider.dart';
 import 'package:mygardenapp/services/global_utils.dart';
+import 'package:mygardenapp/widget/empty_product_widget.dart';
 import 'package:mygardenapp/widget/sale_widget.dart';
 import 'package:mygardenapp/widget/textwidget.dart';
 import 'package:provider/provider.dart';
@@ -39,30 +40,14 @@ class InsideSaleScreen extends StatelessWidget {
         elevation: 0,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         title: TextWidget(
-          text: 'Product on sales',
+          text: 'All Categories',
           color: color,
           fontsize: 24,
           title: true,
         ),
       ),
       body: onsaleProduct.isEmpty
-          ? Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Image.asset('assets/images/emptybox.jpg',
-                      height: 300, width: 700, fit: BoxFit.fill),
-                ),
-                Center(
-                  child: TextWidget(
-                    text: "No product for Include",
-                    fontsize: 30,
-                    color: color,
-                    title: true,
-                  ),
-                )
-              ],
-            )
+          ?  const EmptyProductWidget(text: "No product Sale",)
           : GridView.count(
               // shrinkWrap: true,
               // physics: const NeverScrollableScrollPhysics(),

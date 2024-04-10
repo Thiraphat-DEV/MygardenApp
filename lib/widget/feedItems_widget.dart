@@ -43,8 +43,9 @@ class _FeedItemsWidgetState extends State<FeedItemsWidget> {
       child: InkWell(
         borderRadius: BorderRadius.circular(15.0),
         onTap: () {
-          GlobalMethods.navigateTo(
-              context: context, routeName: InsideProductDetail.routeName);
+          // go to detail of product by id
+          Navigator.pushNamed(context, InsideProductDetail.routeName,
+              arguments: productModel.id);
         },
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -86,7 +87,7 @@ class _FeedItemsWidgetState extends State<FeedItemsWidget> {
                       salePrice: productModel.salePrice,
                       price: productModel.price,
                       textPrice: _qualityController.text,
-                      isSale: true,
+                      isSale: productModel.isOnSale,
                     ),
                     const SizedBox(
                       width: 5,
@@ -99,7 +100,7 @@ class _FeedItemsWidgetState extends State<FeedItemsWidget> {
                             child: FittedBox(
                               child: TextWidget(
                                 color: color,
-                                text: productModel.isPiece ? "Piece": "/G",
+                                text: productModel.isPiece ? "Piece" : "/G",
                                 fontsize: 20,
                                 title: true,
                               ),

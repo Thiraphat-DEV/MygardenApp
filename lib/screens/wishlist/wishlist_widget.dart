@@ -67,7 +67,7 @@ class WishlistWidget extends StatelessWidget {
                     height: 5,
                   ),
                   TextWidget(
-                    text: "200 Baht",
+                    text: "200 ฿",
                     color: color,
                     fontsize: 14,
                     maxLines: 1,
